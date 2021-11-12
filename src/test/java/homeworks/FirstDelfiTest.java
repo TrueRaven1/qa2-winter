@@ -1,5 +1,6 @@
 package homeworks;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Objects;
 
 public class FirstDelfiTest {
     private WebDriver browser;
@@ -30,28 +32,34 @@ public class FirstDelfiTest {
         browser.manage().window().maximize();
 
         browser.get(HOME_PAGE_URL);
-//        wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_COOKIES_BTN));
         wait.until(ExpectedConditions.visibilityOfElementLocated(ACCEPT_COOKIES_BTN));
         browser.findElement(ACCEPT_COOKIES_BTN).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(ADVERTISING_CLOSE));
-//        browser.findElement(ADVERTISING_CLOSE).click();
+
+        browser.switchTo().frame("frontTarget");
+        wait.until(ExpectedConditions.elementToBeClickable(ADVERTISING_CLOSE));
+        browser.findElement(ADVERTISING_CLOSE).click();
+        browser.switchTo().defaultContent();
 
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        System.out.println(titles.get(4).getText());
-        String titleText = titles.get(4).getText();
+        System.out.println("Title text from main page:" + titles.get(10).getText());
+        String titleText = titles.get(10).getText();
 
-        browser.findElements(ARTICLE_TITLE).get(4).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_TITLE));
+        browser.findElements(ARTICLE_TITLE).get(10).click();
         String titleTextInArticle = browser.findElement(ARTICLE_TITLE_IN_ARTICLE).getText();
-        System.out.println(titleTextInArticle);
+        System.out.println("Title text from article page:" + titleTextInArticle);
+        Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
         System.out.println("--------------------");
 
-        Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
-
-        browser.findElement(COMMENT_COUNT_IN_ARTICLE).click();
-        String titleTextInComments = browser.findElement(ARTICLE_TITLE_IN_COMMENTS).getText();
-        System.out.println(titleTextInComments);
-        Assertions.assertTrue(titleText.startsWith(titleTextInComments), "Incorrect text");
-
+        if (browser.findElement(COMMENT_COUNT_IN_ARTICLE).isEnabled()) {
+            browser.findElement(COMMENT_COUNT_IN_ARTICLE).click();
+            String titleTextInComments = browser.findElement(ARTICLE_TITLE_IN_COMMENTS).getText();
+            System.out.println("Title text from comment page:" +titleTextInComments);
+            Assertions.assertTrue(titleText.startsWith(titleTextInComments), "Incorrect text");
+        }
+        else {
+            System.out.println("No comments in this article");
+        }
     }
 
     @Test
@@ -62,12 +70,22 @@ public class FirstDelfiTest {
         browser.manage().window().maximize();
 
         browser.get(HOME_PAGE_URL);
-//        wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_COOKIES_BTN));
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(ACCEPT_COOKIES_BTN));
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        System.out.println(titles);
-    }
+        System.out.println("Number of all articles : " + titles.size());
 
+        int i = 0;
+        for (WebElement element : titles) {
+            System.out.println("Title " + i + ":" + element.getText());
+            i++;
+        }
+
+    }
+    @AfterEach
+    public void closeBrowser () {
+        browser.close();
+    }
 }
