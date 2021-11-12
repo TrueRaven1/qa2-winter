@@ -42,7 +42,7 @@ public class FirstDelfiTest {
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
         System.out.println("Title text from main page:" + " " + titles.get(0).getText());
         String titleText = titles.get(0).getText();
-
+        //Thread.sleep used because Frame not closed momentarily, and it head time to receive click.
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
