@@ -40,25 +40,25 @@ public class FirstDelfiTest {
         browser.switchTo().defaultContent();
 
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        System.out.println("Title text from main page:"+ " " + titles.get(0).getText());
+        System.out.println("Title text from main page:" + " " + titles.get(0).getText());
         String titleText = titles.get(0).getText();
 
         try {
             Thread.sleep(1000);
-        } catch ( InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         wait.until(ExpectedConditions.elementToBeClickable(ARTICLE_TITLE));
         browser.findElements(ARTICLE_TITLE).get(0).click();
         String titleTextInArticle = browser.findElement(ARTICLE_TITLE_IN_ARTICLE).getText();
-        System.out.println("Title text from article page:"+ " " + titleTextInArticle);
+        System.out.println("Title text from article page:" + " " + titleTextInArticle);
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
 
         List<WebElement> dynamicElement = browser.findElements(COMMENT_COUNT_IN_ARTICLE);
         if (dynamicElement.size() != 0) {
             browser.findElement(COMMENT_COUNT_IN_ARTICLE).click();
             String titleTextInComments = browser.findElement(ARTICLE_TITLE_IN_COMMENTS).getText();
-            System.out.println("Title text from comment page:"+ " " + titleTextInComments);
+            System.out.println("Title text from comment page:" + " " + titleTextInComments);
             Assertions.assertTrue(titleText.startsWith(titleTextInComments), "Incorrect text");
         } else {
             System.out.println("No comments in this article");
@@ -71,9 +71,7 @@ public class FirstDelfiTest {
         browser = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(browser, Duration.ofSeconds(10));
         browser.manage().window().maximize();
-
         browser.get(HOME_PAGE_URL);
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(ACCEPT_COOKIES_BTN));
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
@@ -85,7 +83,6 @@ public class FirstDelfiTest {
             System.out.println("Title " + i + ":" + element.getText());
             i++;
         }
-
     }
 
     @AfterEach
