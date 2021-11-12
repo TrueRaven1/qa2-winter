@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
 
 public class FirstDelfiTest {
     private WebDriver browser;
@@ -41,23 +40,27 @@ public class FirstDelfiTest {
         browser.switchTo().defaultContent();
 
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        System.out.println("Title text from main page:" + titles.get(10).getText());
-        String titleText = titles.get(10).getText();
+        System.out.println("Title text from main page:"+ " " + titles.get(0).getText());
+        String titleText = titles.get(0).getText();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_TITLE));
-        browser.findElements(ARTICLE_TITLE).get(10).click();
+        try {
+            Thread.sleep(1000);
+        } catch ( InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(ARTICLE_TITLE));
+        browser.findElements(ARTICLE_TITLE).get(0).click();
         String titleTextInArticle = browser.findElement(ARTICLE_TITLE_IN_ARTICLE).getText();
-        System.out.println("Title text from article page:" + titleTextInArticle);
+        System.out.println("Title text from article page:"+ " " + titleTextInArticle);
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
-        System.out.println("--------------------");
 
-        if (browser.findElement(COMMENT_COUNT_IN_ARTICLE).isEnabled()) {
+        List<WebElement> dynamicElement = browser.findElements(COMMENT_COUNT_IN_ARTICLE);
+        if (dynamicElement.size() != 0) {
             browser.findElement(COMMENT_COUNT_IN_ARTICLE).click();
             String titleTextInComments = browser.findElement(ARTICLE_TITLE_IN_COMMENTS).getText();
-            System.out.println("Title text from comment page:" +titleTextInComments);
+            System.out.println("Title text from comment page:"+ " " + titleTextInComments);
             Assertions.assertTrue(titleText.startsWith(titleTextInComments), "Incorrect text");
-        }
-        else {
+        } else {
             System.out.println("No comments in this article");
         }
     }
@@ -84,8 +87,9 @@ public class FirstDelfiTest {
         }
 
     }
+
     @AfterEach
-    public void closeBrowser () {
+    public void closeBrowser() {
         browser.close();
     }
 }
