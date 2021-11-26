@@ -17,8 +17,8 @@ public class TvNetHomeWork {
     private final By ACCEPT_COOKIES_BTN = By.xpath(".//button[@mode = 'primary']");
     private final By ARTICLE_TITLE = By.xpath(".//span[@itemprop = 'headline name']");
     private final By ARTICLE_COMMENT_COUNT = By.xpath(".//span[contains(@class, 'list-article__comment')]");
-    private final By ARTICLE_TITLE_IN_ARTICLE = By.xpath(".//h1[contains(@class, 'article-headline')]");
-    private final By COMMENT_COUNT_IN_ARTICLE = By.xpath("");
+    private final By ARTICLE_TITLE_IN_ARTICLE = By.xpath(".//h1[contains(@class, 'headline')]");
+    private final By COMMENT_COUNT_IN_ARTICLE = By.xpath(".//span[contains(@class, 'item--count')]");
     private WebDriver browser;
 
     @Test
@@ -33,7 +33,7 @@ public class TvNetHomeWork {
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
 //        List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(1);
+        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(8);
         String titleText = currentArticle.getText();
         System.out.println(titleText);
         wait.until(ExpectedConditions.elementToBeClickable(ARTICLE_TITLE));
@@ -43,6 +43,7 @@ public class TvNetHomeWork {
             String commentsToParse = currentArticle.findElement(ARTICLE_COMMENT_COUNT).getText();
             commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1);
             commentCount = Integer.parseInt(commentsToParse);
+            System.out.println(commentCount);
         }
 
         currentArticle.click();
@@ -51,6 +52,18 @@ public class TvNetHomeWork {
         System.out.println(titleTextInArticle);
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
 
+        int commentCountInArticle = 0;
+        if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()) {
+            String commentsToParseInArticle = browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).getText();
+//            commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1);
+            commentCountInArticle = Integer.parseInt(commentsToParseInArticle);
+            System.out.println(commentCountInArticle);
+        }
+        Assertions.assertEquals(commentCount,commentCountInArticle, "Wrong comments count");
+
+        if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()){
+            browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).click();
+        }
 
     }
 }
