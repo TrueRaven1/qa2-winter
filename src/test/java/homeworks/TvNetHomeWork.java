@@ -1,5 +1,6 @@
 package homeworks;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -33,7 +34,7 @@ public class TvNetHomeWork {
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
 //        List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(8);
+        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(5);
         String titleText = currentArticle.getText();
         System.out.println(titleText);
         wait.until(ExpectedConditions.elementToBeClickable(ARTICLE_TITLE));
@@ -65,5 +66,9 @@ public class TvNetHomeWork {
             browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).click();
         }
 
+    }
+    @AfterEach
+    public void closeBrowser() {
+        browser.close();
     }
 }
