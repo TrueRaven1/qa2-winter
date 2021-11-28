@@ -9,9 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.List;
 
 public class TvNetHomeWork {
     private final String HOME_PAGE_URL = "http://tvnet.lv";
@@ -33,8 +31,7 @@ public class TvNetHomeWork {
         wait.until(ExpectedConditions.elementToBeClickable(ACCEPT_COOKIES_BTN));
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
-//        List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(5);
+        WebElement currentArticle = browser.findElements(ARTICLE_TITLE).get(4);
         String titleText = currentArticle.getText();
         System.out.println(titleText);
         wait.until(ExpectedConditions.elementToBeClickable(ARTICLE_TITLE));
@@ -56,15 +53,14 @@ public class TvNetHomeWork {
         int commentCountInArticle = 0;
         if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()) {
             String commentsToParseInArticle = browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).getText();
-//            commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1);
             commentCountInArticle = Integer.parseInt(commentsToParseInArticle);
             System.out.println(commentCountInArticle);
         }
         Assertions.assertEquals(commentCount,commentCountInArticle, "Wrong comments count");
 
-        if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()){
-            browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).click();
-        }
+//        if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()){
+//            browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).click();
+//        }
 
     }
     @AfterEach
