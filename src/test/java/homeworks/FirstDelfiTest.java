@@ -1,8 +1,10 @@
 package homeworks;
 
+import com.sun.deploy.security.SelectableSecurityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.CollectionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FirstDelfiTest {
     private WebDriver browser;
@@ -76,14 +80,28 @@ public class FirstDelfiTest {
         browser.findElement(ACCEPT_COOKIES_BTN).click();
 
         List<WebElement> titles = browser.findElements(ARTICLE_TITLE);
-        System.out.println("Number of all articles : " + titles.size());
+//        List<WebElement> titles = browser.findElements(ARTICLE_TITLE).stream().filter(Objects::nonNull).collect(Collectors.toList());
+//        titles.removeAll(Collections.singleton(null));
+//       while (titles.remove(null));
+//        titles.removeIf(Objects :: isNull);
 
         int i = 0;
         for (WebElement element : titles) {
-            System.out.println("Title " + i + ":" + element.getText());
+            String text = element.getText();
+            if (!text.isEmpty()) {
+                element.getText();
+            }
+                System.out.println("Title " + i + ":" + text);
             i++;
         }
     }
+
+    //        int i = 0;
+//        for (WebElement element : titles) {
+//            System.out.println("Title " + i + ":" + element.getText());
+//            i++;
+//        }
+
 
     @AfterEach
     public void closeBrowser() {
