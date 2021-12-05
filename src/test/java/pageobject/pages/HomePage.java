@@ -18,6 +18,14 @@ public class HomePage {
         baseFunc.click(ACCEPT_COOKIES_BTN);
     }
 
+    public List<WebElement> getTitles() {
 
+        return baseFunc.findElements(ARTICLE_TITLE_DELFI);
+    }
 
+    public ArticlePage openArticleById(int id) {
+        WebElement articleToClick = baseFunc.findElements(ARTICLE_TITLE_DELFI).get(id);
+        baseFunc.clickByWebElement(articleToClick);
+        return new ArticlePage(baseFunc);
+    }
 }
