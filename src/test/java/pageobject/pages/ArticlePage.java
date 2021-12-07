@@ -18,9 +18,7 @@ public class ArticlePage {
         return baseFunc.getText(ARTICLE_TITLE_IN_ARTICLE_DELFI);
     }
 
-//    List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE);
-
-    public CommentPage openCommentPageByLocator(int id) {
+    public Object openCommentPageByLocator(int id) {
         List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE);
         if (dynamicElement.size() != 0) {
             baseFunc.click(COMMENT_COUNT_IN_ARTICLE);
@@ -28,7 +26,7 @@ public class ArticlePage {
         } else {
             System.out.println("No comments in this article");
         }
-        return null;
+        return baseFunc;
     }
 }
 
