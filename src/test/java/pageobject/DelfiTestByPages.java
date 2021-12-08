@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DelfiTestByPages {
     private final String HOME_PAGE_URL = "delfi.lv";
-    private int articleId = 3;
+    private int articleId = 4;
     private BaseFunc baseFunc = new BaseFunc();
 
     @Test
@@ -22,8 +22,8 @@ public class DelfiTestByPages {
         HomePage homePage = new HomePage(baseFunc);
 
         List<WebElement> titles = homePage.getTitlesOnDelfi();
-        for (WebElement title : titles) {
-            System.out.println(title.getText());
+        for (int i = 0; i < titles.size(); i++) {
+            System.out.println(titles.get(i).getText());
         }
         System.out.println("--------Printed all titles------------");
 
