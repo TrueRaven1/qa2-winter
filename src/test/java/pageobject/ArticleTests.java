@@ -1,6 +1,7 @@
 package pageobject;
 
 import org.junit.jupiter.api.Test;
+import pageobject.model.Article;
 import pageobject.pages.BaseFunc;
 import pageobject.pages.HomePage;
 
@@ -20,8 +21,9 @@ public class ArticleTests {
         homePage.acceptCookies();
 
         //Get 3rd article title
+        Article article = homePage.getArticleById(1);
+        System.out.println(article.getCommentsCount());
 
-        //Get 3rd article comments count
 
         //Open 3rd article
 

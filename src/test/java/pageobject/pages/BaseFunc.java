@@ -33,13 +33,15 @@ public class BaseFunc {
 
 
     public List<WebElement> findElements(By locator) {
-
         return browser.findElements(locator);
     }
 
     public WebElement findElement(By locator) {
-
         return browser.findElement(locator);
+    }
+
+    public List<WebElement> findElements(WebElement parent, By child) {
+       return parent.findElements(child);
     }
 
 //    public void ClickByWebElements (List<WebElement> webElements) {
@@ -55,6 +57,12 @@ public class BaseFunc {
     public String getText(By locator) {
         return findElement(locator).getText();
     }
+
+
+
+//    public String getText(WebElement parent, By child) {
+//
+//    }
 
     public String getText(By locator, int id) {
         List<WebElement> elements = findElements(locator);
