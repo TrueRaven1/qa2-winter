@@ -23,7 +23,7 @@ public class DelfiTestByPages {
 
         List<WebElement> titles = homePage.getTitlesOnDelfi();
         for (int i = 0; i < titles.size(); i++)
-            if (titles.size() > i) {
+            if (!titles.get(i).getText().isEmpty()) {
                 System.out.println(titles.get(i).getText());
             }
         System.out.println("--------Printed all titles------------");
