@@ -14,6 +14,7 @@ public class CommentPage {
         if (!baseFunc.findElements(ARTICLE_TITLE_IN_COMMENTS_Delfi).isEmpty()) {
             return baseFunc.getText(ARTICLE_TITLE_IN_COMMENTS_Delfi);
         }
-        return " no comments ";
+        return null;
+        }
+
     }
-}

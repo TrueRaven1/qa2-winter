@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DelfiTestByPages {
     private final String HOME_PAGE_URL = "delfi.lv";
-    private int articleId = 3;
+    private int articleId = 0;
     private BaseFunc baseFunc = new BaseFunc();
 
     @Test
@@ -22,9 +22,9 @@ public class DelfiTestByPages {
         HomePage homePage = new HomePage(baseFunc);
 
         List<WebElement> titles = homePage.getTitlesOnDelfi();
-        for (int i = 0; i < titles.size(); i++)
-            if (!titles.get(i).getText().isEmpty()) {
-                System.out.println(titles.get(i).getText());
+        for (WebElement title : titles)
+            if (!title.getText().isEmpty()) {
+                System.out.println(title.getText());
             }
         System.out.println("--------Printed all titles------------");
 
@@ -38,10 +38,11 @@ public class DelfiTestByPages {
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Titles are not the same");
         articlePage.openCommentPageByLocator(articleId);
         CommentPage commentPage = new CommentPage(baseFunc);
-        if (!commentPage.getTitleInCommentPageDelfi().startsWith(" no comments ")) {
+        if (commentPage.getTitleInCommentPageDelfi() != null) {
             String titleTextInComments = commentPage.getTitleInCommentPageDelfi();
             System.out.println(titleTextInComments);
             Assertions.assertTrue(titleText.startsWith(titleTextInComments), "Titles are not the same on comment page");
+
         }
     }
 
