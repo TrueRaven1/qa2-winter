@@ -49,6 +49,6 @@ Feature: Weather forecast
 
     And id are: 2172797
 
-    And name are: Cairns
+    And name are: "Cairns"
 
     And cod are: 200
