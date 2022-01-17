@@ -21,7 +21,7 @@ public class ArticleTests {
         homePage.acceptCookies();
 
         //Get 3rd article title
-        Article article = homePage.getArticleById(1);
+        Article article = homePage.getArticleById(2);
         System.out.println(article.getCommentsCount());
 
 
@@ -35,6 +35,16 @@ public class ArticleTests {
 
         //Compare comments count
 
-        //...
+        //Open comment page
+
+        //Get title
+
+        //Get comments count
+
+        //Compare titles
+
+        //Compare comments count
+
+
     }
 }

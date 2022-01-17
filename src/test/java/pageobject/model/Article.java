@@ -28,6 +28,10 @@ public class Article {
         commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1); // -> :: String
         this.commentsCount = Integer.parseInt(commentsToParse); // -> 36 :: int
     }
+//    public void setCommentsCount(String commentsCount) {
+//        this.commentsCount = Integer.parseInt(commentsCount); // -> 36 :: int
+//    }
+
 
     public String getImgUrl() {
         return imgUrl;

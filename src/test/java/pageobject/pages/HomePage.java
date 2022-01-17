@@ -11,6 +11,7 @@ public class HomePage {
     private final By ACCEPT_COOKIES_BTN = By.xpath(".//button[@mode = 'primary']");
     private final By ARTICLE_TITLE_DELFI = By.xpath(".//h1[contains(@class, 'headline__title')]");
     private By ARTICLE = By.tagName("article");
+    private final By ARTICLE_TITLE_TVNET = By.xpath(".//span[@itemprop = 'headline name']");
     private By COMMENTS_COUNT = By.xpath(".//span[contains(@class, 'article__comment')]");
 
     private BaseFunc baseFunc;
@@ -39,6 +40,12 @@ public class HomePage {
         return new ArticlePage(baseFunc);
     }
 
+    public ArticlePage openArticleByIdTVNET (int articleNr) {
+        WebElement articleToClick = baseFunc.findElements(ARTICLE_TITLE_TVNET).get(articleNr -1);
+        baseFunc.clickByWebElement(articleToClick);
+        return new ArticlePage(baseFunc);
+    }
+
     public Article getArticleById(int articleNr) {
         List<WebElement> articlesElements = baseFunc.findElements(ARTICLE);
         Assertions.assertFalse(articlesElements.isEmpty(), "There are no articles!");
@@ -60,6 +67,8 @@ public class HomePage {
 //            WebElement counter = counters.get(0); // -> (36) :: WebElement
             article.setCommentsCount(counters.get(0));
         }
+        List<WebElement> title = baseFunc.findElements(we,ARTICLE_TITLE_TVNET);
+        article.setTitle(title.get(0).getText());
 
         return article;
     }

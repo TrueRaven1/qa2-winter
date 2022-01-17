@@ -41,7 +41,7 @@ public class BaseFunc {
     }
 
     public List<WebElement> findElements(WebElement parent, By child) {
-       return parent.findElements(child);
+        return parent.findElements(child);
     }
 
 //    public void ClickByWebElements (List<WebElement> webElements) {
@@ -59,7 +59,6 @@ public class BaseFunc {
     }
 
 
-
 //    public String getText(WebElement parent, By child) {
 //
 //    }
@@ -69,6 +68,11 @@ public class BaseFunc {
         return elements.get(id).getText();
 
     }
+
+    public List<WebElement> getCommentCount(By locator) {
+        return findElements(locator);
+    }
+
     public void closeBrowser() {
         browser.close();
     }

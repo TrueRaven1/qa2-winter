@@ -73,7 +73,7 @@ public class WeatherStepDefs {
     }
 
     @And("system info is:")
-    public void system_info_is(Map<String, Float> system) {
+    public void system_info_is(Map<String, String> system) {
 
     }
 

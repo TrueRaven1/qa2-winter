@@ -6,9 +6,11 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class ArticlePage {
-    private final By ARTICLE_TITLE_IN_ARTICLE_DELFI = By.xpath(".//h1[@class='text-size-22 text-size-md-30 d-inline']");
     private BaseFunc baseFunc;
-    private final By COMMENT_COUNT_IN_ARTICLE = By.xpath(".//a[contains(@class , 'text-size-19')]");
+    private final By ARTICLE_TITLE_IN_ARTICLE_DELFI = By.xpath(".//h1[@class='text-size-22 text-size-md-30 d-inline']");
+    private final By COMMENT_COUNT_IN_ARTICLE_DELFI = By.xpath(".//a[contains(@class , 'text-size-19')]");
+    private final By ARTICLE_TITLE_IN_ARTICLE_TVNET = By.xpath(".//h1 [contains (@class, 'headline')]");
+    private final By COMMENT_COUNT_IN_ARTICLE_TVNET = By.xpath(".//span [contains (@class, 'count')]");
 
     public ArticlePage(BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
@@ -19,14 +21,29 @@ public class ArticlePage {
     }
 
     public Object openCommentPageByLocator(int id) {
-        List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE);
+        List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_DELFI);
         if (dynamicElement.size() != 0) {
-            baseFunc.click(COMMENT_COUNT_IN_ARTICLE);
+            baseFunc.click(COMMENT_COUNT_IN_ARTICLE_DELFI);
             return new CommentPage(baseFunc);
         } else {
             System.out.println("No comments in this article");
         }
         return baseFunc;
     }
+
+    public String getTitleInArticleTVNET() {
+        return baseFunc.getText(ARTICLE_TITLE_IN_ARTICLE_TVNET);
+    }
+
+    int commentsCountInArticleTVNET = 0;
+    public int getCommentCountInArticleTVNET() {
+
+        if (!baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_TVNET).isEmpty()) {
+          String commentsToParseInArticle = baseFunc.findElement(COMMENT_COUNT_IN_ARTICLE_TVNET).getText();
+          commentsCountInArticleTVNET = Integer.parseInt(commentsToParseInArticle);
+        }
+        return commentsCountInArticleTVNET;
+    }
+
 }
 
