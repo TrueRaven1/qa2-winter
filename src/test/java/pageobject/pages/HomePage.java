@@ -40,8 +40,8 @@ public class HomePage {
         return new ArticlePage(baseFunc);
     }
 
-    public ArticlePage openArticleByIdTVNET (int articleNr) {
-        WebElement articleToClick = baseFunc.findElements(ARTICLE_TITLE_TVNET).get(articleNr -1);
+    public ArticlePage openArticleByIdTVNET(int articleNr) {
+        WebElement articleToClick = baseFunc.findElements(ARTICLE_TITLE_TVNET).get(articleNr - 1);
         baseFunc.clickByWebElement(articleToClick);
         return new ArticlePage(baseFunc);
     }
@@ -67,7 +67,7 @@ public class HomePage {
 //            WebElement counter = counters.get(0); // -> (36) :: WebElement
             article.setCommentsCount(counters.get(0));
         }
-        List<WebElement> title = baseFunc.findElements(we,ARTICLE_TITLE_TVNET);
+        List<WebElement> title = baseFunc.findElements(we, ARTICLE_TITLE_TVNET);
         article.setTitle(title.get(0).getText());
 
         return article;

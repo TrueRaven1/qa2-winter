@@ -69,10 +69,6 @@ public class BaseFunc {
 
     }
 
-    public List<WebElement> getCommentCount(By locator) {
-        return findElements(locator);
-    }
-
     public void closeBrowser() {
         browser.close();
     }

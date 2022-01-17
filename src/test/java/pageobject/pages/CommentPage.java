@@ -27,7 +27,7 @@ public class CommentPage {
     }
 
     public int getCommentsCountOnCommentPage() {
-       return baseFunc.findElements(COMMENTS_COUNT_COMMENT_PAGE_TVNET).size();
+        return baseFunc.findElements(COMMENTS_COUNT_COMMENT_PAGE_TVNET).size();
     }
 
 }

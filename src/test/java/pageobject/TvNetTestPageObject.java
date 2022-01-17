@@ -44,7 +44,7 @@ public class TvNetTestPageObject {
         System.out.println(titleTextInCommentPage);
         int commentsCountInCommentPage = commentPage.getCommentsCountOnCommentPage();
         System.out.println(commentsCountInCommentPage);
-        Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage),"Title on comment page is different");
+        Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage), "Title on comment page is different");
         Assertions.assertEquals(commentCountOnHomePage, commentsCountInCommentPage, "Comments count on comment page is different");
     }
 
