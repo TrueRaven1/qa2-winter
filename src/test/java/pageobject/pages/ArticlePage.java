@@ -20,7 +20,7 @@ public class ArticlePage {
         return baseFunc.getText(ARTICLE_TITLE_IN_ARTICLE_DELFI);
     }
 
-    public Object openCommentPageByLocator(int id) {
+    public Object openCommentPageByLocator() {
         List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_DELFI);
         if (dynamicElement.size() != 0) {
             baseFunc.click(COMMENT_COUNT_IN_ARTICLE_DELFI);
@@ -36,13 +36,25 @@ public class ArticlePage {
     }
 
     int commentsCountInArticleTVNET = 0;
+
     public int getCommentCountInArticleTVNET() {
 
         if (!baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_TVNET).isEmpty()) {
-          String commentsToParseInArticle = baseFunc.findElement(COMMENT_COUNT_IN_ARTICLE_TVNET).getText();
-          commentsCountInArticleTVNET = Integer.parseInt(commentsToParseInArticle);
+            String commentsToParseInArticle = baseFunc.findElement(COMMENT_COUNT_IN_ARTICLE_TVNET).getText();
+            commentsCountInArticleTVNET = Integer.parseInt(commentsToParseInArticle);
         }
         return commentsCountInArticleTVNET;
+    }
+
+    public Object openCommentPageTVNET() {
+        List<WebElement> dynamicElement = baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_TVNET);
+        if (dynamicElement.size() != 0) {
+            baseFunc.click(COMMENT_COUNT_IN_ARTICLE_TVNET);
+            return new CommentPage(baseFunc);
+        } else {
+            System.out.println("No comments in this article");
+        }
+        return baseFunc;
     }
 
 }

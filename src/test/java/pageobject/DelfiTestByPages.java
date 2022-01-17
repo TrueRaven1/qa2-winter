@@ -14,7 +14,7 @@ import java.util.List;
 public class DelfiTestByPages {
     private final String HOME_PAGE_URL = "delfi.lv";
     private int articleId = 0;
-    private BaseFunc baseFunc = new BaseFunc();
+    private final BaseFunc baseFunc = new BaseFunc();
 
     @Test
     public void titlesCheck() {
@@ -36,7 +36,7 @@ public class DelfiTestByPages {
         String titleTextInArticle = articlePage.getTitleInArticleDelfi();
         System.out.println(titleTextInArticle);
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Titles are not the same");
-        articlePage.openCommentPageByLocator(articleId);
+        articlePage.openCommentPageByLocator();
         CommentPage commentPage = new CommentPage(baseFunc);
         if (commentPage.getTitleInCommentPageDelfi() != null) {
             String titleTextInComments = commentPage.getTitleInCommentPageDelfi();
