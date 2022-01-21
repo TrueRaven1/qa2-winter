@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 public class CommentPage {
     private BaseFunc baseFunc;
     private final By ARTICLE_TITLE_IN_COMMENTS_DELFI = By.xpath(".//h1[@class= 'article-title']");
+    private final By COMMENTS_COUNT_COMMENT_PAGE_DELFI = By.xpath(".//div[@class = 'comment-content']");
     private final By ARTICLE_TITLE_IN_COMMENTS_TVNET = By.xpath(".//h1[@class= 'article-headline']");
     private final By COMMENTS_COUNT_COMMENT_PAGE_TVNET = By.xpath(".//li[@class = 'article-comment']");
 
@@ -17,6 +18,10 @@ public class CommentPage {
             return baseFunc.getText(ARTICLE_TITLE_IN_COMMENTS_DELFI);
         }
         return null;
+    }
+
+    public int getCommentCountOnCommentPageDelfi() {
+        return baseFunc.findElements(COMMENTS_COUNT_COMMENT_PAGE_DELFI).size();
     }
 
     public String getTitleInCommentPageTVNET() {

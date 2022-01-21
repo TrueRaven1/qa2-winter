@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ArticlePage {
     private BaseFunc baseFunc;
-    private final By ARTICLE_TITLE_IN_ARTICLE_DELFI = By.xpath(".//h1[@class='text-size-22 text-size-md-30 d-inline']");
+    private final By ARTICLE_TITLE_IN_ARTICLE_DELFI = By.xpath(".//h1[contains(@class, 'text-size-22')]");
     private final By COMMENT_COUNT_IN_ARTICLE_DELFI = By.xpath(".//a[contains(@class , 'text-size-19')]");
     private final By ARTICLE_TITLE_IN_ARTICLE_TVNET = By.xpath(".//h1 [contains (@class, 'headline')]");
     private final By COMMENT_COUNT_IN_ARTICLE_TVNET = By.xpath(".//span [contains (@class, 'count')]");
@@ -18,6 +18,18 @@ public class ArticlePage {
 
     public String getTitleInArticleDelfi() {
         return baseFunc.getText(ARTICLE_TITLE_IN_ARTICLE_DELFI);
+    }
+
+    int commentsCountInArticleDelfi = 0;
+
+    public int getCommentsCountInArticleDelfi() {
+
+        if (!baseFunc.findElements(COMMENT_COUNT_IN_ARTICLE_DELFI).isEmpty()) {
+            String commentsToParseInArticle = baseFunc.findElement(COMMENT_COUNT_IN_ARTICLE_DELFI).getText();
+            commentsToParseInArticle = commentsToParseInArticle.substring(1, commentsToParseInArticle.length() - 1);
+            commentsCountInArticleDelfi = Integer.parseInt(commentsToParseInArticle);
+        }
+        return commentsCountInArticleDelfi;
     }
 
     public Object openCommentPageByLocator() {
