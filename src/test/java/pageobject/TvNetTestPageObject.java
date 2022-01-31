@@ -11,7 +11,7 @@ import pageobject.pages.HomePage;
 
 public class TvNetTestPageObject {
     private final String tvNetUrl = "tvnet.lv";
-    private int ArticleId = (3);
+    private int ArticleId = (1);
     private final BaseFunc baseFunc = new BaseFunc();
 
     @Test
