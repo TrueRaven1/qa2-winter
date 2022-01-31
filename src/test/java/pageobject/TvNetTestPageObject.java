@@ -11,7 +11,7 @@ import pageobject.pages.HomePage;
 
 public class TvNetTestPageObject {
     private final String tvNetUrl = "tvnet.lv";
-    private int ArticleId = (1);
+    private int ArticleId = (4);
     private final BaseFunc baseFunc = new BaseFunc();
 
     @Test
@@ -40,11 +40,14 @@ public class TvNetTestPageObject {
         articlePage.openCommentPageTVNET();
         CommentPage commentPage = new CommentPage(baseFunc);
 
+        if (commentPage.getTitleInCommentPageTVNET() != null){
         String titleTextInCommentPage = commentPage.getTitleInCommentPageTVNET();
         System.out.println(titleTextInCommentPage);
+        Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage), "Title on comment page is different");
+        }
         int commentsCountInCommentPage = commentPage.getCommentsCountOnCommentPage();
         System.out.println(commentsCountInCommentPage);
-        Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage), "Title on comment page is different");
+
         Assertions.assertEquals(commentCountOnHomePage, commentsCountInCommentPage, "Comments count on comment page is different");
     }
 

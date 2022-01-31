@@ -65,8 +65,8 @@ public class ArticlePage {
             return new CommentPage(baseFunc);
         } else {
             System.out.println("No comments in this article");
+            return null;
         }
-        return baseFunc;
     }
 
 }
