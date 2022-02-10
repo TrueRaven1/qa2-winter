@@ -9,7 +9,6 @@ import pageobject.pages.ArticlePage;
 import pageobject.pages.BaseFunc;
 import pageobject.pages.CommentPage;
 import pageobject.pages.HomePage;
-
 import java.util.List;
 
 public class DelfiTestByPages {

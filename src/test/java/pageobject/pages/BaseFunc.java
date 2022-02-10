@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class BaseFunc {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
-
     public List<WebElement> findElements(By locator) {
         return browser.findElements(locator);
     }
@@ -44,11 +42,6 @@ public class BaseFunc {
         return parent.findElements(child);
     }
 
-//    public void ClickByWebElements (List<WebElement> webElements) {
-//        WebDriverWait wait = new WebDriverWait(browser.findElements(), Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.elementToBeClickable(webElements)).click();
-//    }
-
     public void clickByWebElement(WebElement we) {
         WebDriverWait wait = new WebDriverWait(browser, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(we)).click();
@@ -58,19 +51,12 @@ public class BaseFunc {
         return findElement(locator).getText();
     }
 
-
-//    public String getText(WebElement parent, By child) {
-//
-//    }
-
     public String getText(By locator, int id) {
         List<WebElement> elements = findElements(locator);
         return elements.get(id).getText();
-
     }
 
     public void closeBrowser() {
         browser.close();
     }
-
 }

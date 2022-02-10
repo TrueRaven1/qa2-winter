@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pageobject.model.Article;
-
 import java.util.List;
 
 public class HomePage {
@@ -26,9 +25,7 @@ public class HomePage {
     }
 
     public List<WebElement> getTitlesOnDelfi() {
-
         return baseFunc.findElements(ARTICLE_TITLE_DELFI);
-
     }
 
     public ArticlePage openArticleByIdDelfi(int articleNr) {
@@ -46,7 +43,6 @@ public class HomePage {
     public Article getArticleById(int articleNr) {
         List<WebElement> articlesElements = baseFunc.findElements(ARTICLE);
         Assertions.assertFalse(articlesElements.isEmpty(), "There are no articles!");
-
         WebElement currentArticle = articlesElements.get(articleNr - 1);
         return mapArticle(currentArticle);
     }
@@ -61,19 +57,16 @@ public class HomePage {
         if (counters.isEmpty()) {
             article.setCommentsCount(0);
         } else {
-//            WebElement counter = counters.get(0); // -> (36) :: WebElement
             article.setCommentsCount(counters.get(0));
         }
         List<WebElement> title = baseFunc.findElements(we, ARTICLE_TITLE_TVNET);
         article.setTitle(title.get(0).getText());
-
         return article;
     }
 
     public Article getArticleByIdDelfi(int articleNr) {
         List<WebElement> articlesElements = baseFunc.findElements(ARTICLE);
         Assertions.assertFalse(articlesElements.isEmpty(), "There are no articles!");
-
         WebElement currentArticle = articlesElements.get(articleNr - 1);
         return mapArticleD(currentArticle);
     }
@@ -81,20 +74,16 @@ public class HomePage {
     // WebeElement -> Article
     private Article mapArticleD(WebElement we) {
         Article article = new Article();
-
         List<WebElement> counters = baseFunc.findElements(we, COMMENTS_COUNT_DELFI);
         Assertions.assertTrue(counters.size() <= 1, "There is more than 1 counter!");
 
         if (counters.isEmpty()) {
             article.setCommentsCount(0);
         } else {
-//            WebElement counter = counters.get(0); // -> (36) :: WebElement
             article.setCommentsCount(counters.get(0));
         }
         List<WebElement> title = baseFunc.findElements(we, ARTICLE_TITLE_DELFI);
         article.setTitle(title.get(0).getText());
-
         return article;
     }
-
 }

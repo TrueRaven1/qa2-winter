@@ -45,7 +45,6 @@ public class TvNetHomeWork {
         }
 
         currentArticle.click();
-
         String titleTextInArticle = browser.findElement(ARTICLE_TITLE_IN_ARTICLE).getText();
         System.out.println(titleTextInArticle);
         Assertions.assertTrue(titleText.startsWith(titleTextInArticle), "Incorrect title");
@@ -57,12 +56,8 @@ public class TvNetHomeWork {
             System.out.println(commentCountInArticle);
         }
         Assertions.assertEquals(commentCount,commentCountInArticle, "Wrong comments count");
-
-//        if (!browser.findElements(COMMENT_COUNT_IN_ARTICLE).isEmpty()){
-//            browser.findElements(COMMENT_COUNT_IN_ARTICLE).get(0).click();
-//        }
-
     }
+
     @AfterEach
     public void closeBrowser() {
         browser.close();

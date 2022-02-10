@@ -6,8 +6,6 @@ public class ObjectsPractice {
     @Test
     public void workingWithObjects() {
         Student pavel = new Student("Pavel", "Testerovich");
-//        pavel.setFirstName("Pavel");
-//        pavel.setLastName("Testerovich");
         pavel.setAge(80);
         pavel.setPhone(37211111122L);
 

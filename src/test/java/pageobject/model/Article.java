@@ -24,14 +24,10 @@ public class Article {
     }
 
     public void setCommentsCount(WebElement commentsCount) {
-        String commentsToParse = commentsCount.getText(); // -> (36) :: String
-        commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1); // -> :: String
-        this.commentsCount = Integer.parseInt(commentsToParse); // -> 36 :: int
+        String commentsToParse = commentsCount.getText();
+        commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1);
+        this.commentsCount = Integer.parseInt(commentsToParse);
     }
-//    public void setCommentsCount(String commentsCount) {
-//        this.commentsCount = Integer.parseInt(commentsCount); // -> 36 :: int
-//    }
-
 
     public String getImgUrl() {
         return imgUrl;
