@@ -2,7 +2,7 @@ package model;
 
 public class Sys {
     private int type;
-    private int id;
+    private Integer id;
     private float message;
     private String country;
     private int sunrise;
@@ -16,11 +16,11 @@ public class Sys {
         this.type = type;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
