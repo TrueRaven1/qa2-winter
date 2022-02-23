@@ -2,6 +2,7 @@ Feature: Tickets booking system
 
   Scenario: API reservation check
     Given airports "RIX" and "SVO"
+    And seat number is 22
 
     And personal info is:
       | first_name | Deniss     |
@@ -20,3 +21,16 @@ Feature: Tickets booking system
     Then selected airports appears
 
     When we are filling in personal info
+    And we are submitting form
+
+    Then passenger name is show
+
+    When we are pressing Book btn
+    And selecting seat
+
+    Then correct seat selected
+
+    When we are making final book
+
+    Then successful message appears
+

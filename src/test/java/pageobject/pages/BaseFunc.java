@@ -76,4 +76,8 @@ public class BaseFunc {
         inputField.clear();
         inputField.sendKeys(text);
     }
+
+    public void type(By locator, int text) {
+        type(locator, String.valueOf(text));
+    }
 }
