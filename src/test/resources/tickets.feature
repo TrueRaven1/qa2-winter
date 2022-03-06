@@ -5,7 +5,7 @@ Feature: Tickets booking system
     And seat number is 22
 
     And personal info is:
-      | first_name | Deniss     |
+      | first_name | random     |
       | last_name  | Tester     |
       | discount   | none       |
       | adults     | 2          |
@@ -33,4 +33,8 @@ Feature: Tickets booking system
     When we are making final book
 
     Then successful message appears
+
+    When  we are requesting all reservations
+
+    Then reservation exist in the list with correct data
 

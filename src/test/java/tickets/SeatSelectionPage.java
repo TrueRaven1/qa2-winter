@@ -16,6 +16,7 @@ public class SeatSelectionPage {
     }
 
     public void selectSeat(int seatNr) {
+        baseFunc.waitUntilElementsCountAtLeast(SEAT, 10);
         for (WebElement we : baseFunc.findElements(SEAT)) {
             if (Integer.parseInt(we.getText()) == seatNr) {
                 we.click();
