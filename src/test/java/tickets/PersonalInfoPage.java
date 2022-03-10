@@ -1,14 +1,18 @@
 package tickets;
 
+import model.Reservation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pageobject.pages.BaseFunc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PersonalInfoPage {
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
+
     private final By SELECTED_AIRPORT = By.xpath(".//span[@class = 'bTxt']");
     private final By NAME_INPUT = By.id("name");
     private final By SURNAME_INPUT = By.id("surname");
@@ -27,6 +31,7 @@ public class PersonalInfoPage {
     }
 
     public List<String> getSelectedAirports() {
+        LOGGER.info("Getting selected airports");
         List<WebElement> selectedAirports = baseFunc.findElements(SELECTED_AIRPORT);
 
         List<String> result = new ArrayList<>();
@@ -38,26 +43,30 @@ public class PersonalInfoPage {
         return result;
     }
 
-    public Map<String, String> fillInPersonalInfoForm(Map<String, String> params) {
-        baseFunc.type(NAME_INPUT, params.get("first_name"));
-        baseFunc.type(SURNAME_INPUT, params.get("last_name"));
-        baseFunc.type(DISCOUNT_INPUT, params.get("discount"));
-        baseFunc.type(ADULTS_COUNT_INPUT, Integer.parseInt(params.get("adults")));
-        baseFunc.type(CHILDREN_COUNT_INPUT, Integer.parseInt(params.get("kids")));
-        baseFunc.type(BUGS_COUNT_INPUT, Integer.parseInt(params.get("bags")));
-        baseFunc.selectByVisibleText(FLIGHT_SELECT, params.get("flight"));
-        return params;
+    public void fillInPersonalInfoForm(Reservation reservation) {
+        LOGGER.info("Filling in registration form");
+        baseFunc.type(NAME_INPUT, reservation.getName());
+        baseFunc.type(SURNAME_INPUT, reservation.getSurname());
+        baseFunc.type(DISCOUNT_INPUT, reservation.getDiscount());
+        baseFunc.type(ADULTS_COUNT_INPUT, reservation.getAdultCount());
+        baseFunc.type(CHILDREN_COUNT_INPUT, reservation.getChildren());
+        baseFunc.type(BUGS_COUNT_INPUT, reservation.getBagCount());
+        baseFunc.selectByVisibleText(FLIGHT_SELECT, reservation.getFullFlightDay());
+
     }
 
     public void submitForm() {
+        LOGGER.info("Submitting reservation form");
         baseFunc.click(GET_PRISE_BTN);
     }
 
     public String getPassengerName() {
+        LOGGER.info("Getting passenger name and removing sign ! ");
         return baseFunc.findElement(PASSENGER_NAME).getText().replace("!", "");
     }
 
     public void book() {
+        LOGGER.info("Clicking by Book button");
         baseFunc.click(BOOK_BTN);
     }
 }

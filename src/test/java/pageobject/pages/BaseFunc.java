@@ -1,5 +1,7 @@
 package pageobject.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -14,7 +17,10 @@ public class BaseFunc {
     private WebDriver browser;
     private WebDriverWait wait;
 
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
+
     public BaseFunc() {
+        LOGGER.info("Starting Web Browser");
         System.setProperty("webdriver.chrome.driver", "c://chromedriver.exe");
         browser = new ChromeDriver();
         browser.manage().window().maximize();
@@ -22,6 +28,7 @@ public class BaseFunc {
     }
 
     public void openUrl(String url) {
+        LOGGER.info("Open page by: " + url);
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://" + url;
         }
@@ -29,10 +36,12 @@ public class BaseFunc {
     }
 
     public void click(By locator) {
+//        LOGGER.info("Clicking by element");
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
     public List<WebElement> findElements(By locator) {
+        LOGGER.info("Finding list of web elements");
         return browser.findElements(locator);
     }
 

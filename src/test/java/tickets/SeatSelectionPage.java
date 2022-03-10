@@ -1,10 +1,14 @@
 package tickets;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pageobject.pages.BaseFunc;
 
 public class SeatSelectionPage {
+    private final Logger LOGGER = LogManager.getLogger(this.getClass());
+
     private final By SEAT = By.xpath(".//div[@class = 'seat']");
     private final By SEAT_NR = By.xpath(".//div[@class = 'line']");
     private final By BOOK_BTN = By.id("book3");
@@ -16,6 +20,7 @@ public class SeatSelectionPage {
     }
 
     public void selectSeat(int seatNr) {
+        LOGGER.info("Selecting seat number");
         baseFunc.waitUntilElementsCountAtLeast(SEAT, 10);
         for (WebElement we : baseFunc.findElements(SEAT)) {
             if (Integer.parseInt(we.getText()) == seatNr) {
@@ -30,6 +35,7 @@ public class SeatSelectionPage {
     }
 
     public void book() {
+        LOGGER.info("Clicking by Book button");
         baseFunc.click(BOOK_BTN);
     }
 }

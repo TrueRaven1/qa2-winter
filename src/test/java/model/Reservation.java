@@ -1,7 +1,10 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.RandomStringUtils;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Reservation {
     private int id;
     private String name;
@@ -22,6 +25,9 @@ public class Reservation {
     @JsonProperty("flight")
     private int flightDay;
 
+
+    private String fullFlightDay;
+
     @JsonProperty("adults")
     private int adultCount;
 
@@ -40,7 +46,11 @@ public class Reservation {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name.equals("random")) {
+            this.name = RandomStringUtils.randomAlphabetic(15);
+        } else {
+            this.name = name;
+        }
     }
 
     public String getSurname() {
@@ -97,6 +107,15 @@ public class Reservation {
 
     public void setFlightDay(int flightDay) {
         this.flightDay = flightDay;
+    }
+
+    public String getFullFlightDay() {
+        return fullFlightDay;
+    }
+
+    public void setFullFlightDay(String fullFlightDay) {
+        this.fullFlightDay = fullFlightDay;
+        this.flightDay = Integer.parseInt(fullFlightDay.split("-")[0]);
     }
 
     public int getAdultCount() {
