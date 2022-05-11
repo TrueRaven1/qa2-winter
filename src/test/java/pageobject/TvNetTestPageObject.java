@@ -40,10 +40,10 @@ public class TvNetTestPageObject {
         articlePage.openCommentPageTVNET();
         CommentPage commentPage = new CommentPage(baseFunc);
 
-        if (commentPage.getTitleInCommentPageTVNET() != null){
-        String titleTextInCommentPage = commentPage.getTitleInCommentPageTVNET();
-        System.out.println(titleTextInCommentPage);
-        Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage), "Title on comment page is different");
+        if (commentPage.getTitleInCommentPageTVNET() != null) {
+            String titleTextInCommentPage = commentPage.getTitleInCommentPageTVNET();
+            System.out.println(titleTextInCommentPage);
+            Assertions.assertTrue(titleTextOnHomePage.startsWith(titleTextInCommentPage), "Title on comment page is different");
         }
         int commentsCountInCommentPage = commentPage.getCommentsCountOnCommentPage();
         System.out.println(commentsCountInCommentPage);
